@@ -1,0 +1,2 @@
+clientes: CRUD de clientes de una base de datos MySQL, usando Thymeleaf
+	  validaciones con Spring, patrón MVC y una capa de servicios.
