@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantillas</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <h1 th:text="#{plantillas.titulo}"></h1>
+    </header>
+    
+    <footer th:fragment="footer">
+        <p>
+            [[#{plantillas.pie-pagina}]]
+            <a href="https://www.linkedin.com/in/alexismasin/">Alexis Masin</a>
+        </p>
+        <br>
+        <div>
+            <p>
+                [[#{plantillas.lenguaje}]]
+                <a th:href="@{/(lang=es)}">ES</a> |
+                <a th:href="@{/(lang=en)}">EN</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
