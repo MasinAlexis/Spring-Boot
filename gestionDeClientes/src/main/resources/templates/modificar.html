@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="UTF-8">
+      <title>[[#{modificar.titulo}]]</title>
+  </head>
+  <body>
+      <header th:replace="layout/plantillas :: header"></header>
+      <h2>[[#{modificar.datosPersona}]]</h2>
+      <a th:href="@{/}">[[#{modificar.regresar}]]</a>
+      <br>
+      <form th:action="@{/guardar}" method="post" th:object="${persona}">
+          <input type="hidden" name="idPersona" th:field="*{idPersona}"/>
+          <br>
+          <label for="nombre">[[#{modificar.nombre}]] </label>
+          <input type="text" name="nombre" th:field="*{nombre}"/>
+          <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+          <br>
+          <label for="apellido">[[#{modificar.apellido}]] </label>
+          <input type="text" name="apellido" th:field="*{apellido}"/>
+          <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
+          <br>
+          <label for="email">[[#{modificar.email}]] </label>
+          <input type="email" name="email" th:field="*{email}"/>
+          <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+          <br>
+          <label for="telefono">[[#{modificar.telefono}]] </label>
+          <input type="text" name="telefono" th:field="*{telefono}"/>
+          <br>
+          <input type="submit" name="guardar" th:value="#{modificar.botonGuardar}"/>
+      </form>
+      <footer th:replace="layout/plantillas :: footer"></footer>
+  </body>
+</html>
