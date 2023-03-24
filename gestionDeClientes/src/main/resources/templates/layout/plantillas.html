@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+<head th:fragment="head">
     <meta charset="UTF-8">
     <title>Plantillas</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
     <header th:fragment="header">
-        <h1 th:text="#{plantillas.titulo}"></h1>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+            <div class="container">
+                <a th:href="@{/}" class="navbar-brand" th:text="#{plantillas.titulo}">Control de Clientes</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-2">
+                            <a th:href="@{/}" class="nav-link active" th:text="#{barra.titulo}"> Inicio </a>
+                        </li>
+                    </ul>
+                    <ul sec:authorize="isAuthenticated()" class="navbar-nav ml-auto">
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user"></i>
+                                <span th:text="#{barra.bienvenido}">Bienvenido</span>
+                                <span sec:authentication="name">Usuario</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" th:action="@{/logout}">
+                                <a href="#" onclick="this.parentNode.submit();" class="nav-link">
+                                    <i class="fas fa-user-times"></i> [[#{barra.salir}]]
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
     </header>
     
     <footer th:fragment="footer">
