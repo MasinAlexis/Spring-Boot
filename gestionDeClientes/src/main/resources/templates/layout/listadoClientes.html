@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <title>Listado Clientes</title>
+    </head>
+    <body>
+        <section th:fragment="listadoClientes" id="clientes">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{persona.titulo-lista}]]</h4>
+                            </div>
+                            <div th:if="${personas != null and !personas.empty}">
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="#{persona.nombre}">Nombre</th>
+                                            <th th:text="#{persona.saldo}">Saldo</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="persona, contador : ${personas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${persona.nombre} + ' ' + ${persona.apellido}]]</td>
+                                            <td>[[${new java.text.DecimalFormat('$#,##0.00').format(persona.saldo)}]]</td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${persona.idPersona}"
+                                                   class="btn btn-secondary"/>
+                                                <i class="fas fa-angle-double-right"></i> [[#{index.editar}]]
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar(idPersona=${persona.idPersona})}"
+                                                   class="btn btn-danger"/>
+                                                <i class="fas fa-angle-double-right"></i> [[#{index.eliminar}]]
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${personas == null or personas.empty}">
+                                <span th:text="#{index.mensajeVacio}">Lista Vacia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
