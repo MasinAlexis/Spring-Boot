@@ -26,6 +26,12 @@ public class ControladorInicio {
         //user va a tener la informacion del usuario que hizo login en la aplicacion
         var personas = personaService.listarPersonas();
         log.info("Ejecutando el controlador Spring MVC");
+        var saldoTotal=0D;
+        for (var p: personas){
+            saldoTotal = saldoTotal + p.getSaldo();
+        }
+        model.addAttribute("saldoTotal", saldoTotal);
+        model.addAttribute("totalClientes",personas.size());
         model.addAttribute("personas", personas);
         return "index";
     }

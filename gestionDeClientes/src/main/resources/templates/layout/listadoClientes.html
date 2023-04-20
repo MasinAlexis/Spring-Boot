@@ -9,7 +9,7 @@
         <section th:fragment="listadoClientes" id="clientes">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
                                 <h4>[[#{persona.titulo-lista}]]</h4>
@@ -46,6 +46,24 @@
                             </div>
                             <div class="text-center p-2" th:if="${personas == null or personas.empty}">
                                 <span th:text="#{index.mensajeVacio}">Lista Vacia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center bg-danger text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.saldoTotal}">Saldo Total</h3>
+                                <h4 class="display-4">
+                                    [[${new java.text.DecimalFormat('$#,##0.00').format(saldoTotal)}]]
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{persona.totalClientes}">Total de Clientes</h3>
+                                <h4 class="display-4">
+                                    <i class="fas fa-users"></i> [[${totalClientes}]]
+                                </h4>
                             </div>
                         </div>
                     </div>
